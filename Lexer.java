@@ -54,9 +54,8 @@ class Lexer {
                 matcher.get(i).token=2;
                 matcher.get(i).zustand= TYPE.ZAHL;
             }
-        }
-        printlexerTokens();
-        //printlexerResult();
+        }        printlexerTokens();
+
     }
 
     // Methode zum Analysieren der Eingabe nach Anpassung der Tokens
@@ -91,13 +90,6 @@ class Lexer {
             }
         }
         System.out.println("Lexer Tokens:\n"+lexerTokens);
-    }
-
-    // Methode zum Ausgeben der Werte in der analysierte Eingabe
-    void printlexerResult(){
-        for(int j=0;j<matcher.size();j++){
-            System.out.println(matcher.get(j).zustand + ": " + matcher.get(j).value);
-        }
     }
 
     // Methode zum Zuweisen von Token und Zustand zum aktuellen Zeichen der Eingabe
