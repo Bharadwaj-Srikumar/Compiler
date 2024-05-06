@@ -9,11 +9,17 @@ Der Compiler hat 5 Kernbestandteile nämlich Lexer, Converter, Parser, ZwischenC
 
 2. Converter: Der Converter wandelt die Eingabezeichen (insbesondere der römischen Zahlen in der Eingabe) zu der Form arabischen Zahlen nach den offiziellen Regeln zum Umwandeln römischer in arabischer Zahlen, prüft nach semantischer Korrektheit und weist wieder die neue Array Tokens hinzu.
 
-3. Parser: Der Parser prüft die Ausgabe vom Converter nach syntaktischer Korrektheit über die definierte Sprachgrammatik und erzeugt den abstrakten Syntaxbaum mithilfe des NodePrinters.
+3. Parser: Der Parser prüft die Ausgabe vom Converter auf syntaktische Korrektheit basierend auf der definierten Sprachgrammatik und erzeugt einen abstrakten Syntaxbaum (AST) mithilfe der Node-Klassen (ValueNode, OneChildNode, TwoChildNode).
+
+Der Parser verarbeitet eine Liste von Tokens (ArrayList<Token>) und versucht, eine AST-Struktur daraus zu erstellen. Das Ziel ist es, eine Baumstruktur zu generieren, die die logische Struktur des Ausdrucks im Eingabetoken darstellt.
+
+Die Wurzel des Baumes wird durch das letzte Operator-Token repräsentiert.
+Die linken und rechten Terme sind die linke und rechte Seite des Baumes. Dafür dienen die Methoden expression(), term(), factor() welche Definition als Kommentar in dem Code selber zu finden ist.
+Die NodePrinter-Klasse ermöglicht die Visualisierung des abstrakten Syntaxbaums (AST), indem sie den Baum in einer konsolengerechten Formatierung ausgibt.
 
 4. ZwischenCodeErzeuger: Der ZwischenCodeErzeuger nimmt die Ausgabe vom NodePrinter bzw. Parser und erzeugt den ZwischenCode in der PostFix-Notation (Operand, Operand, Operator), damit der Code auf mehrere Kellermaschinen portiert werden kann.
 
-5. Kellermaschine: In diesem Compiler wurde die Kellermaschine über die Node-Klasse hinaus realisiert. Die Methode evaluate() wurde von ValueNode, UnaryNode sowie BinaryNode vererbt und wird zum Berechnen des mathematischen Ergebnis in dem Parser genutzt.
+5. Kellermaschine: In diesem Compiler wurde die Kellermaschine über die Node-Klasse hinaus realisiert. Die Methode evaluate() wurde von ValueNode, OneChildNode sowie TwoChildNode vererbt und wird zum Berechnen des mathematischen Ergebnis in dem Parser genutzt.
 
 Sonstige Teile des Compilers
 1. Type und Token: Die Klassen Type und Token werden überall in dem FrontEnd des Compilers nämlich Lexer, Converter und Parser verwendet, um den Eingabezeichen Tokens zuzuweisen.
@@ -26,10 +32,10 @@ Sonstige Teile des Compilers
    toString(): gibt einfach den String-Wert des Eingabezeichens zurück
    evaluate(): gibt den umgewandelten Double()-Wert des Eingabezeichens zurück
 
-5. UnaryNode:
-   toString(): Stellt die Eingabezeichen in Form: "UnaryNode{operator= operatorValue, right= rightValue}" auf Basis des bevorstehenden Operators dar.
+5. OneChildNode:
+   toString(): Stellt die Eingabezeichen in Form: "OneChildNode{operator= operatorValue, nodeRight= valueRight}" auf Basis des bevorstehenden Operators dar.
    evaluate(): gibt entweder den positiven- oder den negativen-Wert des Eingabezeichens auf Basis des bevorstehenden Operators zurück.
 
-6. BinaryNode:
-   toString(): Stellt die Eingabezeichen in Form: "{left= leftValue, operator= operatorValue, right= rightValue}" auf Basis des bevorstehenden Operators dar.
+6. TwoChildNode:
+   toString(): Stellt die Eingabezeichen in Form: "{nodeLeft= valueLeft, operator= operatorValue, nodeRight= valueRight}" auf Basis des bevorstehenden Operators dar.
    evaluate(): Wendet die jeweilige mathemtische Operation auf den linken und den rechten Eingabeteil des Parser an und gibt das berechnete Erdergebnis zurück.

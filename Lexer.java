@@ -11,7 +11,7 @@ class Lexer {
         this.lexerInput = input;
     }
 
-    // Klasse zum Zuweisen von Token und Zustand zu jedem gültigen Zeichen der Eingabe
+  // Listenobjekt zum Zuweisen von Token und Zustand zu jedem gültigen Zeichen der Eingabe
 
     ArrayList<Token> matcher = new ArrayList<Token>();
 

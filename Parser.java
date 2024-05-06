@@ -1,4 +1,4 @@
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 
 public class Parser {
@@ -18,48 +18,48 @@ public class Parser {
     }
 
     /**expression(): This method is used to parse expressions in the input. 
-     * It starts by calling the term() method to get the left operand, then it looks for any plus or minus operators, 
-     * and if found, it calls the term() method again to get the right operand. 
-     * It then creates a new BinaryNode object with the left and right operands and the operator and 
-     * sets it as the left operand for the next iteration. 
+     * It starts by calling the term() method to get the nodeLeft operand, then it looks for any plus or minus operators, 
+     * and if found, it calls the term() method again to get the nodeRight operand. 
+     * It then creates a new TwoChildNode object with the nodeLeft and nodeRight operands and the operator and 
+     * sets it as the nodeLeft operand for the next iteration. 
      * It returns the final Node object that represents the parsed expression. */
     private Node expression() {
-        Node left = term();
+        Node nodeLeft = term();
         while (match(TYPE.PLUS, TYPE.MINUS)) {
-            Token operator = previous();
-            Node right = term();
-            left = new BinaryNode(left, operator, right);
+            Token operator = getPreviousToken();
+            Node nodeRight = term();
+            nodeLeft = new TwoChildNode(nodeLeft, operator, nodeRight);
         }
-        return left;
+        return nodeLeft;
     }
 
     /**term(): This method is used to parse terms in the input. 
      * It works similar to the expression() method but it looks for any multiply or divide operators. */
     private Node term() {
-        Node left = factor();
+        Node nodeLeft = factor();
         while (match(TYPE.MULT, TYPE.DIV)) {
-            Token operator = previous();
-            Node right = factor();
-            left = new BinaryNode(left, operator, right);
+            Token operator = getPreviousToken();
+            Node nodeRight = factor();
+            nodeLeft = new TwoChildNode(nodeLeft, operator, nodeRight);
         }
-        return left;
+        return nodeLeft;
     }
 
     /**factor(): This method is used to parse factors in the input. 
      * It starts by checking if the current token is a unary operator (plus or minus), if yes, 
-     * it calls the factor() method again to get the right operand and creates a new UnaryNode object with the operator 
-     * and the right operand. If the current token is an integer or float, it creates a new ValueNode object with the 
-     * token's value. If the current token is a left parenthesis, it calls the expression() method to get the 
+     * it calls the factor() method again to get the nodeRight operand and creates a new OneChildNode object with the operator 
+     * and the nodeRight operand. If the current token is an integer or float, it creates a new ValueNode object with the 
+     * token's value. If the current token is a nodeLeft parenthesis, it calls the expression() method to get the 
      * expression inside the parenthesis and returns it. */
    private Node factor() {
         if (match(TYPE.PLUS, TYPE.MINUS)) {
-            Token operator = previous();
-            Node right = factor();
-            Node node = new UnaryNode(operator, right);
+            Token operator = getPreviousToken();
+            Node nodeRight = factor();
+            Node node = new OneChildNode(operator, nodeRight);
             return node;
         } 
         else if (match(TYPE.ZAHL)) {
-            Token value = previous();
+            Token value = getPreviousToken();
             ValueNode vnode = new ValueNode(value);
             return vnode;
         } 
@@ -69,7 +69,7 @@ public class Parser {
             return expression;
         }
         else { 
-            throw new RuntimeException("Expect expression, but found " + peek().zustand + "");
+            throw new RuntimeException("Expect expression, but found " + getCurrentToken().zustand + "");
         }
     }
 
@@ -90,26 +90,26 @@ public class Parser {
     }
 
     private boolean check(TYPE type) {
-        if (isAtEnd())
+        if (isEndToken())
             return false;
-        return peek().zustand == type;
+        return getCurrentToken().zustand == type;
     }
 
     private Token advance() {
-        if (!isAtEnd())
+        if (!isEndToken())
             current++;
-            return previous();
+            return getPreviousToken();
     }
 
-    private boolean isAtEnd() {
+    private boolean isEndToken() {
         return current==tokens.size();
     }
 
-    private Token peek() {
+    private Token getCurrentToken() {
         return tokens.get(current);
     }
 
-    private Token previous() {
+    private Token getPreviousToken() {
         return tokens.get(current - 1);
     }
 }

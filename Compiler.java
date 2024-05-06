@@ -20,7 +20,7 @@ public class Compiler{
         nodePrinter.print(); // Syntax Tree
 
         System.out.println("\n"+"Zwischencode (PostFix-Notation):");
-        IntermediateCodeGenerator intermediateCodeGenerator = new IntermediateCodeGenerator(syntaxTree);
+        ZwischenCode intermediateCodeGenerator = new ZwischenCode(syntaxTree);
         intermediateCodeGenerator.generate();
         intermediateCodeGenerator.print();
         

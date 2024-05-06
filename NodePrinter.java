@@ -14,16 +14,16 @@ public class NodePrinter {
             ValueNode valueNode = (ValueNode) node;
             System.out.println(indent + valueNode.value.value);
         } 
-        else if (node instanceof UnaryNode) {
-            UnaryNode unaryNode = (UnaryNode) node;
-            System.out.println(indent + unaryNode.operator.value);
-            print(unaryNode.right, indent + "\t");
+        else if (node instanceof OneChildNode) {
+            OneChildNode OneChildNode = (OneChildNode) node;
+            System.out.println(indent + OneChildNode.operator.value);
+            print(OneChildNode.nodeRight, indent + "\t");
         } 
-        else if (node instanceof BinaryNode) {
-            BinaryNode binaryNode = (BinaryNode) node;
-            System.out.println(indent + binaryNode.operator.value);
-            print(binaryNode.left, indent + "\t");
-            print(binaryNode.right, indent + "\t");
+        else if (node instanceof TwoChildNode) {
+            TwoChildNode TwoChildNode = (TwoChildNode) node;
+            System.out.println(indent + TwoChildNode.operator.value);
+            print(TwoChildNode.nodeLeft, indent + "\t");
+            print(TwoChildNode.nodeRight, indent + "\t");
         }
     }
 }
