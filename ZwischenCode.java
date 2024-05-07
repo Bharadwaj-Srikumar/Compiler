@@ -19,15 +19,15 @@ public class ZwischenCode {
         if (node instanceof ValueNode) {
             ValueNode valueNode = (ValueNode) node;
             intermediateCode.add("PUSH" + "\t\t" + valueNode.value.value);
-        } else if (node instanceof UnaryNode) {
-            UnaryNode unaryNode = (UnaryNode) node;
-            generate(unaryNode.right);
-            intermediateCode.add("OPERATOR" + "\t" + unaryNode.operator.value);
-        } else if (node instanceof BinaryNode) {
-            BinaryNode binaryNode = (BinaryNode) node;
-            generate(binaryNode.left);
-            generate(binaryNode.right);
-            intermediateCode.add("OPERATOR" + "\t" + binaryNode.operator.value);
+        } else if (node instanceof OneChildNode) {
+            OneChildNode OneChildNode = (OneChildNode) node;
+            generate(OneChildNode.nodeRight);
+            intermediateCode.add("OPERATOR" + "\t" + OneChildNode.operator.value);
+        } else if (node instanceof TwoChildNode) {
+            TwoChildNode TwoChildNode = (TwoChildNode) node;
+            generate(TwoChildNode.nodeLeft);
+            generate(TwoChildNode.nodeRight);
+            intermediateCode.add("OPERATOR" + "\t" + TwoChildNode.operator.value);
         } 
     }
 
