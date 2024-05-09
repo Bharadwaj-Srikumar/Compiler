@@ -3,7 +3,7 @@ import java.nio.file.Path;
 import java.io.IOException;
 public class Compiler{
     public static void main(String[] args) throws IOException{
-        String path = "./Eingabebeispiele/Eingabe1.txt";
+        String path = "./Eingabebeispiele/Eingabe4.txt";
         Path Datei = Path.of(path);
         String input = Files.readString(Datei);
         System.out.println("\nCompiler gestartet:\n");
@@ -27,7 +27,7 @@ public class Compiler{
             System.out.println("Parser Tokens:");
             Parser parser = new Parser(converter.getResult());
             Node syntaxTree = parser.parse();
-            System.out.println(syntaxTree+"\n");
+            System.out.println(syntaxTree.printSyntaxTree()+"\n");
 
             // Syntax Tree
             System.out.println("Abstrakter Syntaxbaum:");
