@@ -1,4 +1,3 @@
-// import java.util.List;
 import java.util.ArrayList;
 
 public class Parser {
@@ -17,7 +16,7 @@ public class Parser {
     private Node expression() {
         Node nodeLeft = term();
         while (match(TYPE.PLUS, TYPE.MINUS)) {
-            Token operator = getPreviousToken();
+            Token operator = tokens.get(current - 1);
             Node nodeRight = term();
             nodeLeft = new TwoChildNode(nodeLeft, operator, nodeRight);
         }
@@ -27,7 +26,7 @@ public class Parser {
     private Node term() {
         Node nodeLeft = factor();
         while (match(TYPE.MULT, TYPE.DIV)) {
-            Token operator = getPreviousToken();
+            Token operator = tokens.get(current - 1);
             Node nodeRight = factor();
             nodeLeft = new TwoChildNode(nodeLeft, operator, nodeRight);
         }
@@ -36,63 +35,53 @@ public class Parser {
 
    private Node factor() {
         if (match(TYPE.PLUS, TYPE.MINUS)) {
-            Token operator = getPreviousToken();
+            Token operator = tokens.get(current - 1);
             Node nodeRight = factor();
             Node node = new OneChildNode(operator, nodeRight);
             return node;
         } 
         else if (match(TYPE.ZAHL)) {
-            Token value = getPreviousToken();
-            ValueNode vnode = new ValueNode(value);
+            Token value = tokens.get(current - 1);
+            NumberNode vnode = new NumberNode(value);
             return vnode;
         } 
         else if (match(TYPE.OPEN_PAR)) {
             Node expression = this.expression();
-            consume(TYPE.CLOSE_PAR, "Expect ')' after expression.");
+            verarbeiten(TYPE.CLOSE_PAR, "Expect ')' after expression.");
             return expression;
         }
         else { 
-            throw new RuntimeException("Expect expression, but found " + getCurrentToken().zustand + "");
+            throw new RuntimeException("Expect expression, but found " + tokens.get(current).zustand + "");
         }
     }
 
     private boolean match(TYPE... types) {
         for (TYPE type : types) {
-            if (check(type)) {
-                advance();
+            if (pruefeZustand(type)) {
+                gotoNextToken();
                 return true;
             }
         }
         return false;
     }
 
-    private Token consume(TYPE type, String message) {
-        if (check(type))
-            return advance();
+    private Token verarbeiten(TYPE type, String message) {
+        if (pruefeZustand(type))
+            return gotoNextToken();
         throw new RuntimeException(message);
     }
 
-    private boolean check(TYPE type) {
-        if (isEndToken())
+    private boolean pruefeZustand(TYPE type) {
+        if (current==tokens.size())
             return false;
-        return getCurrentToken().zustand == type;
+        return tokens.get(current).zustand == type;
     }
 
-    private Token advance() {
-        if (!isEndToken())
+    private Token gotoNextToken() {
+        if (!(current==tokens.size()))
             current++;
-            return getPreviousToken();
+            return tokens.get(current - 1);
     }
 
-    private boolean isEndToken() {
-        return current==tokens.size();
-    }
 
-    private Token getCurrentToken() {
-        return tokens.get(current);
-    }
-
-    private Token getPreviousToken() {
-        return tokens.get(current - 1);
-    }
 }

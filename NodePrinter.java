@@ -10,9 +10,9 @@ public class NodePrinter {
     }
 
     private void print(Node node, String indent) {
-        if (node instanceof ValueNode) {
-            ValueNode valueNode = (ValueNode) node;
-            System.out.println(indent + valueNode.value.value);
+        if (node instanceof NumberNode) {
+            NumberNode NumberNode = (NumberNode) node;
+            System.out.println(indent + NumberNode.value.value);
         } 
         else if (node instanceof OneChildNode) {
             OneChildNode OneChildNode = (OneChildNode) node;

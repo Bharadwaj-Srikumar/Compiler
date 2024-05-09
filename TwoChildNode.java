@@ -1,6 +1,3 @@
-// TwoChildNode consists nodeLeft-node, nodeRight-node and binary-operator-node 
-// overrides the evaluate() function 
-// performs operation of operator type
 public class TwoChildNode extends Node {
     public Node nodeLeft;
     public Token operator;
@@ -13,9 +10,9 @@ public class TwoChildNode extends Node {
     }
 
     @Override
-    public double evaluate() {
-        double valueLeft = nodeLeft.evaluate();
-        double valueRight = nodeRight.evaluate();
+    public double berechnen() {
+        double valueLeft = nodeLeft.berechnen();
+        double valueRight = nodeRight.berechnen();
 
         switch (operator.zustand) {
             case PLUS:
@@ -32,26 +29,26 @@ public class TwoChildNode extends Node {
     }
 
     @Override
-    public String toString() {
-        if(nodeRight instanceof ValueNode && nodeLeft instanceof ValueNode){
-            double valueLeft = nodeLeft.evaluate();
-            double valueRight = nodeRight.evaluate();
+    public String printSyntaxTree() {
+        if(nodeRight instanceof NumberNode && nodeLeft instanceof NumberNode){
+            double valueLeft = nodeLeft.berechnen();
+            double valueRight = nodeRight.berechnen();
             return "{" +
                 "nodeLeft=" + valueLeft +
                 ", operator=" + operator.value +
                 ", nodeRight=" + valueRight +
                 "}";
         }
-        else if(nodeRight instanceof ValueNode) {
-            double valueRight = nodeRight.evaluate();
+        else if(nodeRight instanceof NumberNode) {
+            double valueRight = nodeRight.berechnen();
             return "{" +
                 "nodeLeft=" + nodeLeft +
                 ", operator=" + operator.value +
                 ", nodeRight=" + valueRight +
                 "}";
         }
-        else if(nodeLeft instanceof ValueNode) {
-            double valueLeft = nodeRight.evaluate();
+        else if(nodeLeft instanceof NumberNode) {
+            double valueLeft = nodeRight.berechnen();
             return "{" +
                 "nodeLeft=" + valueLeft +
                 ", operator=" + operator.value +

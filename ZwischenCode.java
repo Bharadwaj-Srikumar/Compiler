@@ -16,9 +16,9 @@ public class ZwischenCode {
     }
 
     private void erzeugen(Node node) {
-        if (node instanceof ValueNode) {
-            ValueNode valueNode = (ValueNode) node;
-            zwischenCode.add("PUSH" + "\t\t" + valueNode.value.value);
+        if (node instanceof NumberNode) {
+            NumberNode NumberNode = (NumberNode) node;
+            zwischenCode.add("PUSH" + "\t\t" + NumberNode.value.value);
         } else if (node instanceof OneChildNode) {
             OneChildNode OneChildNode = (OneChildNode) node;
             erzeugen(OneChildNode.nodeRight);

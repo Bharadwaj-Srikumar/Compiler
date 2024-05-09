@@ -12,9 +12,9 @@ public class Compiler{
 
         System.out.println("Parser Tokens:");
         Parser parser = new Parser(converter.getResult());
+        // Parser Ergebnis
         Node syntaxTree = parser.parse();
-        System.out.println(syntaxTree+"\n"); // Parser Ergebnis
-
+        System.out.println( syntaxTree.printSyntaxTree()+"\n");
         System.out.println("Abstrakter Syntaxbaum:");
         NodePrinter nodePrinter = new NodePrinter(syntaxTree);
         nodePrinter.print(); // Syntax Tree
@@ -24,7 +24,7 @@ public class Compiler{
         intermediateCodeGenerator.generate();
         intermediateCodeGenerator.print();
         
-        double result = syntaxTree.evaluate();
+        double result = syntaxTree.berechnen();
         System.out.println("\n"+"Endergebnis: " + result+"\n\nCompiler beendet");
 
 

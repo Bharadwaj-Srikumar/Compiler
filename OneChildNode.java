@@ -1,7 +1,3 @@
-// OneChildNode consists nodeRight-node and unary-operator-node
-// overrides the evaluate() function
-// performs operation of operator type
-// (for negative Numbers)
 public class OneChildNode extends Node {
     public Token operator;
     public Node nodeRight;
@@ -12,8 +8,8 @@ public class OneChildNode extends Node {
     }
 
     @Override
-    public double evaluate() {
-        double valueRight = nodeRight.evaluate();
+    public double berechnen() {
+        double valueRight = nodeRight.berechnen();
 
         switch (operator.zustand) {
             case PLUS:
@@ -26,9 +22,9 @@ public class OneChildNode extends Node {
     }
 
     @Override
-    public String toString() {
-        if(nodeRight instanceof ValueNode){
-            double valueRight = nodeRight.evaluate();
+    public String printSyntaxTree() {
+        if(nodeRight instanceof NumberNode){
+            double valueRight = nodeRight.berechnen();
             return "OneChildNode{" +
                 "operator=" + operator.value +
                 ", nodeRight=" + valueRight +
