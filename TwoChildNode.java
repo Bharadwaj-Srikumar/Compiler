@@ -34,32 +34,32 @@ public class TwoChildNode extends Node {
             double valueLeft = nodeLeft.berechnen();
             double valueRight = nodeRight.berechnen();
             return "{" +
-                "nodeLeft=" + valueLeft +
+                "leftChild=" + valueLeft +
                 ", operator=" + operator.value +
-                ", nodeRight=" + valueRight +
+                ", rightChild=" + valueRight +
                 "}";
         }
         else if(nodeRight instanceof NumberNode) {
             double valueRight = nodeRight.berechnen();
             return "{" +
-                "nodeLeft=" + nodeLeft +
+                "leftChild=" + nodeLeft +
                 ", operator=" + operator.value +
-                ", nodeRight=" + valueRight +
+                ", rightChild=" + valueRight +
                 "}";
         }
         else if(nodeLeft instanceof NumberNode) {
             double valueLeft = nodeRight.berechnen();
             return "{" +
-                "nodeLeft=" + valueLeft +
+                "leftChild=" + valueLeft +
                 ", operator=" + operator.value +
-                ", nodeRight=" + nodeRight +
+                ", rightChild=" + nodeRight +
                 "}";
         }
         else {
             return "{" +
-                "nodeLeft=" + nodeLeft +
+                "leftChild=" + nodeLeft +
                 ", operator=" + operator.value +
-                ", nodeRight=" + nodeRight +
+                ", rightChild=" + nodeRight +
                 "}";
         }
     }

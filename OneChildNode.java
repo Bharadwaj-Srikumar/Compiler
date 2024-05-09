@@ -27,13 +27,13 @@ public class OneChildNode extends Node {
             double valueRight = nodeRight.berechnen();
             return "OneChildNode{" +
                 "operator=" + operator.value +
-                ", nodeRight=" + valueRight +
+                ", rightChild=" + valueRight +
                 "}";
                 }
         else {
             return "OneChildNode{" +
                 "operator=" + operator.value +
-                ", nodeRight=" + nodeRight +
+                ", rightChild=" + nodeRight +
                 "}";
                 }
     }

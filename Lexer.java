@@ -18,9 +18,16 @@ class Lexer {
     // Methode zum Entfernen der Leerzeichen in der Eingabe und zum Umwandeln der Eingabe in einer ArrayList
     ArrayList<String> trim(String array){
         ArrayList<String> trimmed_array = new ArrayList<String>();
+        String leerzeichen = " ";
+        String tab = "\t";
+        String zeilenUmbruch = "\n";
+        String zeilenUmbruch1 = "\r";
+        String zeilenUmbruch2 = "\r\n";
+        String Ersetzer = "";
+        array = array.replace(leerzeichen, Ersetzer).replace(tab, Ersetzer).replace(zeilenUmbruch, Ersetzer).replace(zeilenUmbruch1, Ersetzer).replace(zeilenUmbruch2, Ersetzer);
         for(int i=0;i<array.length();i++){
             String value_trim = String.valueOf(array.charAt(i));
-            if(!value_trim.equals(" ")){
+            if(!value_trim.equals(leerzeichen) || !value_trim.equals(zeilenUmbruch) || !value_trim.equals(zeilenUmbruch1) || !value_trim.equals(zeilenUmbruch2) || !value_trim.equals(tab)){
                 trimmed_array.add(value_trim);
             }
         }
@@ -63,7 +70,7 @@ class Lexer {
         for(int j=0;j<matcher.size();j++){
             lexerTokens = lexerTokens + "Match: "+matcher.get(j).value+"\n";
             if(matcher.get(j).token==0){
-                lexerTokens = lexerTokens + "Lexikalischer Fehler in Position "+(j+1)+". Zeichen: "+matcher.get(j).value;
+                lexerTokens = lexerTokens + "Lexikalischer Fehler in Position "+(j+1)+". Ungültiges Zeichen "+matcher.get(j).value;
                 System.out.println(lexerTokens);
                 System.exit(0);
             }
@@ -135,6 +142,7 @@ class Lexer {
     }
 
     ArrayList<String> getResult(){
+        System.out.println("Lexer Output:"+lexerOutput+"\n\n");
         return lexerOutput;
     }
 }
