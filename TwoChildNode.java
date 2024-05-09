@@ -29,7 +29,7 @@ public class TwoChildNode extends Node {
     }
 
     @Override
-    public String printSyntaxTree() {
+    public String toString() {
         if(nodeRight instanceof NumberNode && nodeLeft instanceof NumberNode){
             double valueLeft = nodeLeft.berechnen();
             double valueRight = nodeRight.berechnen();

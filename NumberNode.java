@@ -11,7 +11,7 @@ public class NumberNode extends Node {
     }
 
     @Override
-    public String printSyntaxTree() {
+    public String toString() {
         return value.toString();
     }
 }

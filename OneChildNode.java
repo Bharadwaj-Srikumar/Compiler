@@ -22,7 +22,7 @@ public class OneChildNode extends Node {
     }
 
     @Override
-    public String printSyntaxTree() {
+    public String toString() {
         if(nodeRight instanceof NumberNode){
             double valueRight = nodeRight.berechnen();
             return "OneChildNode{" +
