@@ -19,6 +19,22 @@ Die NodePrinter-Klasse ermöglicht die Visualisierung des abstrakten Syntaxbaums
 
 4. ZwischenCodeErzeuger: Der ZwischenCodeErzeuger nimmt die Ausgabe vom NodePrinter bzw. Parser und erzeugt den ZwischenCode in der PostFix-Notation (Operand, Operand, Operator), damit der Code auf mehrere Kellermaschinen portiert werden kann.
 
+Zwischencode: ist eine Schnittstelle zwischen Quellcode und Machinecode. Bevor der Computer den Maschinencode erzeugt, erstellt der Compiler einen Zwischencode. Da der Zwischencode einfacher zu verstehen ist und zu verarbeiten als der ursprüngliche Quellcode.
+Der Compiler kann den Zwischencode leichter optimieren, um sicherzustellen, dass das Programm schnell und effizient läuft.
+Also der Zwischencode sieht aus wie eine einfache Version des Quellcodes. Er enthält Anweisungen und Informationen, die der Computer verstehen kann, aber nicht so detailliert wie der Quellcode.
+
+
+
+Methode erzeugen:
+
+Wenn der übergebene Knoten ein NumberNode ist wird der Wert dieser Zahl dem Zwischencode als PUSH-Befehl hinzugefügt.
+Wenn der Knoten ein OneChildNode ist wird zuerst der Zwischencode für das rechte Kind generiert.
+Dann wird der Operator dieses Knotens dem Zwischencode als OPERATOR-Befehl hinzugefügt.
+Fall TwoChildNode:
+Wenn der Knoten ein TwoChildNode ist, wird zuerst der Zwischencode für das linke Kind generiert.
+Dann wird der Zwischencode für das rechte Kind generiert.
+Schließlich wird der Operator dieses Knotens dem Zwischencode als OPERATOR-Befehl hinzugefügt.
+
 5. Kellermaschine: In diesem Compiler wurde die Kellermaschine über die Node-Klasse hinaus realisiert. Die Methode berechnen() wurde von NumberNode, OneChildNode sowie TwoChildNode vererbt und wird zum Berechnen des mathematischen Ergebnis in dem Parser genutzt.
 
 Sonstige Teile des Compilers
