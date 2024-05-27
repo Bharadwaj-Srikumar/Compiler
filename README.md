@@ -17,13 +17,12 @@ Die Wurzel des Baumes wird durch das letzte Operator-Token repräsentiert.
 Die linken und rechten Terme sind die linke und rechte Seite des Baumes. Dafür dienen die Methoden expression(), term(), factor() welche Definition als Kommentar in dem Code selber zu finden ist.
 Die NodePrinter-Klasse ermöglicht die Visualisierung des abstrakten Syntaxbaums (AST), indem sie den Baum in einer konsolengerechten Formatierung ausgibt.
 
-4. ZwischenCodeErzeuger: Der ZwischenCodeErzeuger nimmt die Ausgabe vom NodePrinter bzw. Parser und erzeugt den ZwischenCode in der PostFix-Notation (Operand, Operand, Operator), damit der Code auf mehrere Kellermaschinen portiert werden kann.
-
-Zwischencode: ist eine Schnittstelle zwischen Quellcode und Machinecode. Bevor der Computer den Maschinencode erzeugt, erstellt der Compiler einen Zwischencode. Da der Zwischencode einfacher zu verstehen ist und zu verarbeiten als der ursprüngliche Quellcode.
-Der Compiler kann den Zwischencode leichter optimieren, um sicherzustellen, dass das Programm schnell und effizient läuft.
-Also der Zwischencode sieht aus wie eine einfache Version des Quellcodes. Er enthält Anweisungen und Informationen, die der Computer verstehen kann, aber nicht so detailliert wie der Quellcode.
-
-
+4.Zwischencode erzeugen, auch bekannt als Intermediate Code Generation, ist ein wichtiger Schritt im Kompilierungsprozess. In dieser Phase wird der abstrakte Syntaxbaum (AST) in einen Zwischencode umgewandelt. Dieser Zwischencode ist oft eine einfache, aber explizite Darstellung des Programms.
+Der Zwischencode nutzt die Postfix-Notation, um den AST in lineare Ausdrücke ohne Klammern umzuwandeln. Dabei werden die Node-Klassen (NumberNode, OneChildNode, TwoChildNode) verwendet.
+Die Ausgabe dieser linearen Ausdrücke folgt so:
+NumberNode: Operand
+OneChildNode: Operand Operator
+TwoChildNode: Operand Operand Operator
 
 Methode erzeugen:
 
