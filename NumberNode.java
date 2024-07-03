@@ -5,8 +5,7 @@ public class NumberNode extends Node {
         this.value = value;
     }
 
-    @Override
-    public double berechnen() {
+    public double getnodeValue() {
         return Double.parseDouble(value.value);
     }
 

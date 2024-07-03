@@ -40,8 +40,10 @@ public class Compiler{
             intermediateCodeGenerator.generate();
             intermediateCodeGenerator.print();
 
-            // Endergebnis            
-            double result = syntaxTree.berechnen();
+            // Endergebnis  
+            String[] postfix = intermediateCodeGenerator.getPostFixArray();
+            Kellermaschine kellermaschine = new Kellermaschine(postfix);     
+            double result = kellermaschine.berechnen();
             System.out.println("\n"+"Endergebnis: " + result+"\n");
         }
         System.out.println("\nCompiler beendet");

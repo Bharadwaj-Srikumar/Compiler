@@ -9,30 +9,12 @@ public class TwoChildNode extends Node {
         this.nodeRight = nodeRight;
     }
 
-    @Override
-    public double berechnen() {
-        double valueLeft = nodeLeft.berechnen();
-        double valueRight = nodeRight.berechnen();
-
-        switch (operator.zustand) {
-            case PLUS:
-                return valueLeft + valueRight;
-            case MINUS:
-                return valueLeft - valueRight;
-            case MULT:
-                return valueLeft * valueRight;
-            case DIV:
-                return valueLeft / valueRight;
-            default:
-                throw new RuntimeException("Invalid operator type.");
-        }
-    }
-
+ 
     @Override
     public String toString() {
         if(nodeRight instanceof NumberNode && nodeLeft instanceof NumberNode){
-            double valueLeft = nodeLeft.berechnen();
-            double valueRight = nodeRight.berechnen();
+            double valueLeft = ((NumberNode)nodeLeft).getnodeValue();
+            double valueRight = ((NumberNode)nodeRight).getnodeValue();
             return "{" +
                 "leftChild=" + valueLeft +
                 ", operator=" + operator.value +
@@ -40,7 +22,7 @@ public class TwoChildNode extends Node {
                 "}";
         }
         else if(nodeRight instanceof NumberNode) {
-            double valueRight = nodeRight.berechnen();
+            double valueRight = ((NumberNode)nodeRight).getnodeValue();
             return "{" +
                 "leftChild=" + nodeLeft +
                 ", operator=" + operator.value +
@@ -48,7 +30,7 @@ public class TwoChildNode extends Node {
                 "}";
         }
         else if(nodeLeft instanceof NumberNode) {
-            double valueLeft = nodeRight.berechnen();
+            double valueLeft = ((NumberNode)nodeRight).getnodeValue();
             return "{" +
                 "leftChild=" + valueLeft +
                 ", operator=" + operator.value +

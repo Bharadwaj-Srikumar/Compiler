@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Parser {
-    private ArrayList<Token> tokens  = new ArrayList<Token>();;
+    private ArrayList<Token> tokens  = new ArrayList<Token>();
     private int current = 0;
 
     public Parser(ArrayList<Token> tokens) {

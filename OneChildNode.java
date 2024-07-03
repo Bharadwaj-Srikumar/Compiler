@@ -7,24 +7,11 @@ public class OneChildNode extends Node {
         this.nodeRight = nodeRight;
     }
 
-    @Override
-    public double berechnen() {
-        double valueRight = nodeRight.berechnen();
-
-        switch (operator.zustand) {
-            case PLUS:
-                return valueRight;
-            case MINUS:
-                return -valueRight;
-            default:
-                throw new RuntimeException("Invalid operator type.");
-        }
-    }
 
     @Override
     public String toString() {
         if(nodeRight instanceof NumberNode){
-            double valueRight = nodeRight.berechnen();
+            double valueRight = ((NumberNode)nodeRight).getnodeValue();
             return "OneChildNode{" +
                 "operator=" + operator.value +
                 ", rightChild=" + valueRight +
