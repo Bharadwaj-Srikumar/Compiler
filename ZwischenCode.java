@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public class ZwischenCode {
     // Deklaration von Attributen von Type Node und eine Liste von Typ String.
     private Node parentNode;
     private List<String> zwischenCode;
-    private List<String>stackValue;
+    private List<String> stackValue;
 
     // Konstruktur zum Initialisieren des Baumes und Liste.
     public ZwischenCode(Node root) {
@@ -14,11 +13,13 @@ public class ZwischenCode {
         this.zwischenCode = new ArrayList<>();
         this.stackValue = new ArrayList<String>();
     }
+
     // Die Methode gibt eine Liste zwischenCode von type String zurück.
     public List<String> generate() {
         erzeugen(parentNode);
         return zwischenCode;
     }
+
     //
     private void erzeugen(Node node) {
         if (node instanceof NumberNode) {
@@ -36,7 +37,7 @@ public class ZwischenCode {
             erzeugen(TwoChildNode.nodeRight);
             zwischenCode.add("OPERATOR" + "\t" + TwoChildNode.operator.value);
             stackValue.add(TwoChildNode.operator.value);
-        } 
+        }
     }
 
     public void print() {
@@ -45,7 +46,7 @@ public class ZwischenCode {
         }
     }
 
-    public String[] getPostFixArray(){
+    public String[] getPostFixArray() {
         String[] postfix = this.stackValue.toArray(new String[0]);
         return postfix;
     }
