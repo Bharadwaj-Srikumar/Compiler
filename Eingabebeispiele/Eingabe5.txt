@@ -1,1 +1,1 @@
-(II + V)*(VII-IV)
+(III + IV)*(V-II)
