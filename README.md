@@ -1,7 +1,7 @@
 # Compilerdesign
-Das erste Design des Compilerbauprojektes, was Teil der Prüfungsleistung des Fachs Compilerbau an der Hochschule Bochum ist.
+Der Compiler zum Umwandeln römischer mathematischen Ausdrücke in arabischen Ausdrücken und Berechnen des Endergebnisses als eine Dezimalzahl, was Teil der Prüfungsleistung des Fachs Compilerbau an der Hochschule Bochum ist.
 
-Dieser Compiler nimmt mathematische Ausdrücke in Form römische Zahlen und Operatoren (+,-,*,/,%), konvertiert die römischen Zahlen in arabischen Zahlen nach den offiziellen Umwandlungsregeln, scannt und parst die Eingabe (prüft die Eingabe auf syntaktische sowie semantische korrektheit), erzeugt den abstrakten Syntaxbaum nach definierter Sprachgrammatik, erzeugt den ZwischenCode in der PostFix-Notation (in Form Operand, Operand, Operator) und berechnet ebenfalls im Endeffekt das Ergebnis des Ausdrücks nach den mathematischen Berechnungsregeln.
+Der Compiler nimmt mathematische Ausdrücke in Form römische Zahlen und Operatoren (+,-,*,/,%), konvertiert die römischen Zahlen in arabischen Zahlen nach den offiziellen Umwandlungsregeln, scannt und parst die Eingabe (prüft die Eingabe auf syntaktische sowie semantische korrektheit), erzeugt den abstrakten Syntaxbaum nach definierter Sprachgrammatik, erzeugt den ZwischenCode in der PostFix-Notation (in Form Operand, Operand, Operator) und berechnet ebenfalls im Endeffekt das Ergebnis des Ausdrücks nach den mathematischen Berechnungsregeln.
 
 Der Compiler hat 5 Kernbestandteile nämlich Lexer, Converter, Parser, ZwischenCodeErzeuger und der Kellermaschine.
 
